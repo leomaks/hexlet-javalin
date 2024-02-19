@@ -1,4 +1,4 @@
-package org.example.hexlet.model;
+package org.example.hexlet.model.courses;
 
 
 public class CoursePage {
