@@ -1,5 +1,7 @@
-package org.example.hexlet.model.courses;
+package org.example.hexlet.dto.courses;
 
+
+import org.example.hexlet.model.courses.Course;
 
 public class CoursePage {
     private Course course;

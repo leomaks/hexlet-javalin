@@ -1,7 +1,8 @@
-package org.example.hexlet.model.users;
+package org.example.hexlet.dto.users;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import org.example.hexlet.model.users.User;
 
 
 @Getter

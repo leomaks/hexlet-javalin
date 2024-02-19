@@ -1,4 +1,4 @@
-@import org.example.hexlet.model.users.UsersPage
+@import org.example.hexlet.dto.users.UsersPage
 @param UsersPage page
 
 
