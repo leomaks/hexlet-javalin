@@ -18,6 +18,7 @@ import org.example.hexlet.model.users.User;
 import org.example.hexlet.dto.users.UserPage;
 import org.example.hexlet.model.users.UsersRepository;
 import org.example.hexlet.dto.users.UsersPage;
+import org.example.hexlet.util.NamedRoutes;
 
 public class HelloWorld {
     public static void main(String[] args) {
@@ -35,12 +36,12 @@ public class HelloWorld {
         });
 
 // COURSES
-        app.get("/courses/build", ctx -> {
+        app.get(NamedRoutes.buildCoursePath(), ctx -> {
             var page = new BuildCoursePage();
             ctx.render("courses/build.jte", Collections.singletonMap("page", page));
         });
 
-        app.post("/courses", ctx -> {
+        app.post(NamedRoutes.coursesPath(), ctx -> {
             try {
 
                 var name = ctx.formParamAsClass("name", String.class)
@@ -52,7 +53,7 @@ public class HelloWorld {
 
                 var course = new Course(name, description);
                 CoursesRepository.save(course);
-                ctx.redirect("/courses");
+                ctx.redirect(NamedRoutes.coursesPath());
 
             } catch (ValidationException e) {
                 var page = new BuildCoursePage(e.getErrors());
@@ -60,7 +61,7 @@ public class HelloWorld {
             }
         });
 
-        app.get("/courses", ctx -> {
+        app.get(NamedRoutes.coursesPath(), ctx -> {
             var term = ctx.queryParam("term");
             List<Course> courses;
 
@@ -75,7 +76,9 @@ public class HelloWorld {
 
         });
 
-        app.get("/courses/{id}", ctx -> {
+
+
+        app.get(NamedRoutes.coursePath("{id}"), ctx -> {
             var id = ctx.pathParam("id");
             var course = CoursesRepository.find(Long.valueOf(id)).get();
             var page = new CoursePage(course);
@@ -96,13 +99,13 @@ public class HelloWorld {
         // USERS
 
 
-        app.get("/users/build", ctx -> {
+        app.get(NamedRoutes.buildUserPath(), ctx -> {
             var page = new BuildUserPage();
             ctx.render("users/build.jte", Collections.singletonMap("page", page));
         });
 
 
-        app.post("/users", ctx -> {
+        app.post(NamedRoutes.usersPath(), ctx -> {
             var name = ctx.formParam("name").trim();;
             var email = ctx.formParam("email").trim().toLowerCase();
 
@@ -121,7 +124,7 @@ public class HelloWorld {
             }
         });
 
-        app.get("/users", ctx -> {
+        app.get(NamedRoutes.usersPath(), ctx -> {
             var term = ctx.queryParam("term");
             List<User> users;
 
@@ -137,7 +140,7 @@ public class HelloWorld {
         });
 
 
-        app.get("/users/{id}", ctx -> {
+        app.get(NamedRoutes.userPath("{id}"), ctx -> {
             var id = ctx.pathParam("id");
             var user = UsersRepository.find(Long.valueOf(id));
             var page = new UserPage(user.get());
