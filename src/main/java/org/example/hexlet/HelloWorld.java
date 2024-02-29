@@ -3,15 +3,31 @@ package org.example.hexlet;
 import io.javalin.Javalin;
 import org.example.hexlet.controller.CoursesController;
 import org.example.hexlet.controller.UsersController;
+import org.example.hexlet.dto.MainPage;
 import org.example.hexlet.model.courses.*;
 import org.example.hexlet.util.NamedRoutes;
+
+import java.util.Collections;
 
 public class HelloWorld {
     public static void main(String[] args) {
 
         Data.getAllCourses().stream().forEach(course -> CoursesRepository.save(course));
         var app = Javalin.create(config -> config.plugins.enableDevLogging());
-        app.get("/", ctx -> ctx.render("layout/page.jte"));
+    //    app.get("/", ctx -> ctx.render("layout/page.jte"));
+        //////////
+
+
+        app.get("/", ctx -> {
+            var visited = Boolean.valueOf(ctx.cookie("visited"));
+            var page = new MainPage(visited);
+            ctx.render("index.jte", Collections.singletonMap("page", page));
+            ctx.cookie("visited", String.valueOf(true));
+        });
+
+
+
+
 
 // COURSES
         app.get(NamedRoutes.coursesPath(), CoursesController::index);
