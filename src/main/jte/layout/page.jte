@@ -22,6 +22,7 @@
                 <li><a href="/users" class="nav-link px-2 text-white">Пользователи</a></li>
                 <li><a href="/users/build" class="nav-link px-2 text-white">Создать нового пользователя</a></li>
                 <li><a href="/courses/build" class="nav-link px-2 text-white">Создать новый курс</a></li>
+                <li><a href="/sessions/build" class="nav-link px-2 text-white">Регистрация</a></li>
             </ul>
         </div>
     </div>

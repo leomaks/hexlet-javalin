@@ -24,6 +24,10 @@ public class NamedRoutes {
         return "/users/" + id;
     }
 
+    public static String sessionsPath() {
+        return "/sessions";
+    }
+
 /*
 "/users/build"
 
