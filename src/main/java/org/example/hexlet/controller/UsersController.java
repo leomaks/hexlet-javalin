@@ -15,12 +15,14 @@ import java.util.List;
 public class UsersController {
     public static void build(Context ctx) {
             var page = new BuildUserPage();
+
             ctx.render("users/build.jte", Collections.singletonMap("page", page));
     }
 
     public static void create (Context ctx) {
         var name = ctx.formParam("name").trim();
         var email = ctx.formParam("email").trim().toLowerCase();
+
 
         try {
             var passwordConfirmation = ctx.formParam("passwordConfirmation");
@@ -30,9 +32,12 @@ public class UsersController {
                     .get();
             var user = new User(name, email, password);
             UsersRepository.save(user);
+            ctx.sessionAttribute("flash", "User has been created!");
             ctx.redirect("/users");
         } catch (ValidationException e) {
             var page = new BuildUserPage(name, email, e.getErrors());
+            ctx.sessionAttribute("flash", "Error, the item was not created");
+            page.setFlash(ctx.consumeSessionAttribute("flash"));
             ctx.render("users/build.jte", Collections.singletonMap("page", page));
         }
     }
@@ -48,6 +53,7 @@ public class UsersController {
         }
 
         var page = new UsersPage(users, term);
+        page.setFlash(ctx.consumeSessionAttribute("flash"));
         ctx.render("users/users.jte", Collections.singletonMap("page", page));
 
     }

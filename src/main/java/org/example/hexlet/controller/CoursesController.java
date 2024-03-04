@@ -24,6 +24,7 @@ public class CoursesController {
         }
 
         var page = new CoursesPage(courses, term);
+        page.setFlash(ctx.consumeSessionAttribute("flash"));
         ctx.render("courses/courses.jte", Collections.singletonMap("page", page));
     }
 
@@ -50,10 +51,13 @@ public class CoursesController {
 
             var course = new Course(name, description);
             CoursesRepository.save(course);
+            ctx.sessionAttribute("flash", "Course has been created!");
             ctx.redirect(NamedRoutes.coursesPath());
 
         } catch (ValidationException e) {
             var page = new BuildCoursePage(e.getErrors());
+            ctx.sessionAttribute("flash", "Error, the item was not created");
+            page.setFlash(ctx.consumeSessionAttribute("flash"));
             ctx.render("courses/build.jte", Collections.singletonMap("page", page));
         }
     }

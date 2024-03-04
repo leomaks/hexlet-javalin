@@ -3,7 +3,9 @@
 
 
 
+
 @template.layout.page(
+page = page,
 content = @`
 
     <form action="/courses" method="get">

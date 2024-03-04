@@ -4,6 +4,7 @@
 
 
 @template.layout.page(
+page = page,
 content = @`
 
     <form action="/users" method="get">

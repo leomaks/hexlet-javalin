@@ -14,8 +14,6 @@ public class MainPage {
     }
 
 
-
-
     public Boolean isVisited() {
         return visited;
     }

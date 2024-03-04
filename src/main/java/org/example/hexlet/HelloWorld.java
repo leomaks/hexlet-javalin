@@ -32,13 +32,13 @@ public class HelloWorld {
             var page = new MainPage(ctx.sessionAttribute("currentUser"));
             ctx.render("index.jte", Collections.singletonMap("page", page));
         });
-
         ///
         app.get("/sessions/build", SessionsController::build);
 // Процесс логина
         app.post("/sessions", SessionsController::create);
 // Процесс выхода из аккаунта
         app.delete("/sessions", SessionsController::destroy);
+
 
 
 

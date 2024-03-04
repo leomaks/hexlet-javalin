@@ -1,4 +1,7 @@
 @import gg.jte.Content
+@import org.example.hexlet.dto.BasePage
+@param BasePage page = null
+
 @param Content content
 @param Content footer = null
 
@@ -22,7 +25,7 @@
                 <li><a href="/users" class="nav-link px-2 text-white">Пользователи</a></li>
                 <li><a href="/users/build" class="nav-link px-2 text-white">Создать нового пользователя</a></li>
                 <li><a href="/courses/build" class="nav-link px-2 text-white">Создать новый курс</a></li>
-                <li><a href="/sessions/build" class="nav-link px-2 text-white">Регистрация</a></li>
+                <li><a href="/sessions/build" class="nav-link px-2 text-white">Войти в аккаунт</a></li>
             </ul>
         </div>
     </div>
@@ -30,6 +33,20 @@
 <body>
 <div class="mx-auto p-4 py-md-5">
 
+    @if(page != null && page.getFlash() != null)
+        <p>
+            @if( page.getFlash().contains("Error"))
+                <div class="alert alert-danger" role="alert">
+                    ${page.getFlash()}
+                </div>
+            @else
+                <div class="alert alert-success" role="alert">
+                    ${page.getFlash()}
+                </div>
+            @endif
+
+        </p>
+    @endif
 
 ${content}
 </div>
