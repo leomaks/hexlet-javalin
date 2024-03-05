@@ -6,9 +6,10 @@ import org.example.hexlet.dto.users.BuildUserPage;
 import org.example.hexlet.dto.users.UserPage;
 import org.example.hexlet.dto.users.UsersPage;
 import org.example.hexlet.model.users.User;
-import org.example.hexlet.model.users.UsersRepository;
+import org.example.hexlet.repositories.UsersRepository;
 
 
+import java.sql.SQLException;
 import java.util.Collections;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class UsersController {
             ctx.render("users/build.jte", Collections.singletonMap("page", page));
     }
 
-    public static void create (Context ctx) {
+    public static void create (Context ctx) throws SQLException {
         var name = ctx.formParam("name").trim();
         var email = ctx.formParam("email").trim().toLowerCase();
 
@@ -42,7 +43,7 @@ public class UsersController {
         }
     }
 
-    public static void index (Context ctx) {
+    public static void index (Context ctx) throws SQLException {
         var term = ctx.queryParam("term");
         List<User> users;
 
@@ -58,7 +59,7 @@ public class UsersController {
 
     }
 
-    public static void show (Context ctx) {
+    public static void show (Context ctx) throws SQLException {
         var id = ctx.pathParam("id");
         var user = UsersRepository.find(Long.valueOf(id));
         var page = new UserPage(user.get());

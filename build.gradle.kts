@@ -7,7 +7,10 @@ plugins {
 
     id("io.freefair.lombok") version "8.1.0"
 
+//    id ("com.github.johnrengelman.shadow") version "6.0.0"
+
 }
+
 
 
 
@@ -18,28 +21,15 @@ application {
 group = "org.example"
 version = "1.0-SNAPSHOT"
 
-//apply plugin: 'java'
 
 repositories {
     mavenCentral()
 }
 
-/*configurations {
-    compileOnly {
-        extendsFrom annotationProcessor
-    }
-}
 
- */
 
 dependencies {
 
-    //compileOnly 'org.projectlombok:lombok:1.18.20'
-    //annotationProcessor 'org.projectlombok:lombok:1.18.20'
-
-    // Версии зависимостей могут отличаться
-    // Здесь мы сразу подключаем зависимости,
-    // которые понадобятся во время обучения
 
     implementation ("org.apache.commons:commons-text:1.11.0")
     implementation("io.javalin:javalin:5.6.1")
@@ -52,9 +42,8 @@ dependencies {
     implementation("io.javalin:javalin-rendering:5.6.2")
 
 
-
-
-
+    implementation("com.h2database:h2:2.2.220")
+    implementation("com.zaxxer:HikariCP:5.0.1")
 
 }
 

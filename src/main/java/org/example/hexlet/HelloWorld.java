@@ -6,15 +6,62 @@ import org.example.hexlet.controller.SessionsController;
 import org.example.hexlet.controller.UsersController;
 import org.example.hexlet.dto.MainPage;
 import org.example.hexlet.model.courses.*;
+import org.example.hexlet.repositories.BaseRepository;
+import org.example.hexlet.repositories.CoursesRepository;
 import org.example.hexlet.util.NamedRoutes;
 
+import com.zaxxer.hikari.HikariConfig;
+import com.zaxxer.hikari.HikariDataSource;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.sql.SQLException;
 import java.util.Collections;
+import java.util.stream.Collectors;
 
 public class HelloWorld {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
-        Data.getAllCourses().stream().forEach(course -> CoursesRepository.save(course));
-        var app = Javalin.create(config -> config.plugins.enableDevLogging());
+       // Data.getAllCourses().stream().forEach(course -> CoursesRepository.save(course));
+/////////
+
+        var hikariConfig = new HikariConfig();
+        hikariConfig.setJdbcUrl("jdbc:h2:mem:hexlet_project;DB_CLOSE_DELAY=-1;");
+
+        var dataSource = new HikariDataSource(hikariConfig);
+
+
+        // Получаем путь до файла в src/main/resources
+        var url = HelloWorld.class.getClassLoader().getResource("schema.sql");
+        var file = new File(url.getFile());
+        Collectors Collectors = null;
+        var sql = Files.lines(file.toPath()).collect(Collectors.joining("\n"));
+
+        // Получаем соединение, создаем стейтмент и выполняем запрос
+        try (var connection = dataSource.getConnection();
+             var statement = connection.createStatement()) {
+            statement.execute(sql);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+
+        BaseRepository.dataSource = dataSource;
+
+        var app = Javalin.create(config -> {config.plugins.enableDevLogging();});
+
+
+
+
+
+
+
+
+
+
+/////////
+
+
     //    app.get("/", ctx -> ctx.render("layout/page.jte"));
         //////////
 
