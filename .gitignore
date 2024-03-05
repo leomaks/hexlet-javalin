@@ -42,9 +42,22 @@ bin/
 ### Mac OS ###
 .DS_Store
 
- 
+
  .idea/gradle.xml
  .idea/misc.xml
  .idea/uiDesigner.xml
  .idea/vcs.xml
 
+**/*/presentation*.html
+.vagrant
+
+node_modules/
+vendor/
+dist
+.gradle/
+
+caches/
+
+jte-classes
+
+bin
