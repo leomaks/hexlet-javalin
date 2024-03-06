@@ -7,7 +7,6 @@ plugins {
 
     id("io.freefair.lombok") version "8.1.0"
 
-//    id ("com.github.johnrengelman.shadow") version "6.0.0"
 
 }
 
