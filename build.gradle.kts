@@ -1,5 +1,6 @@
 import org.gradle.api.tasks.testing.logging.TestExceptionFormat
 import org.gradle.api.tasks.testing.logging.TestLogEvent
+import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
 
@@ -9,8 +10,6 @@ plugins {
     id("com.github.johnrengelman.shadow") version "8.1.1"
     id("java")
 }
-
-
 
 
 application {
