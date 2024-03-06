@@ -5,9 +5,7 @@ import org.example.hexlet.controller.CoursesController;
 import org.example.hexlet.controller.SessionsController;
 import org.example.hexlet.controller.UsersController;
 import org.example.hexlet.dto.MainPage;
-import org.example.hexlet.model.courses.*;
 import org.example.hexlet.repositories.BaseRepository;
-import org.example.hexlet.repositories.CoursesRepository;
 import org.example.hexlet.util.NamedRoutes;
 
 import com.zaxxer.hikari.HikariConfig;
@@ -23,17 +21,10 @@ import java.util.stream.Collectors;
 public class HelloWorld {
     public static void main(String[] args) throws IOException {
 
-       // Data.getAllCourses().stream().forEach(course -> CoursesRepository.save(course));
-/////////
-
         var hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl("jdbc:h2:mem:hexlet_project;DB_CLOSE_DELAY=-1;");
 
         var dataSource = new HikariDataSource(hikariConfig);
-
-      //  Path pathToFile = Paths.get(filename);
-      //  System.out.println(pathToFile.toAbsolutePath());
-        // Получаем путь до файла в src/main/resources
 
         var url = HelloWorld.class.getClassLoader().getResource("schema.sql");
         var file = new File(url.getFile());
@@ -57,22 +48,15 @@ public class HelloWorld {
             var page = new MainPage(ctx.sessionAttribute("currentUser"));
             ctx.render("index.jte", Collections.singletonMap("page", page));
         });
-        ///
         app.get("/sessions/build", SessionsController::build);
-// Процесс логина
         app.post("/sessions", SessionsController::create);
-// Процесс выхода из аккаунта
         app.delete("/sessions", SessionsController::destroy);
-
-
-
 
 // COURSES
         app.get(NamedRoutes.coursesPath(), CoursesController::index);
         app.get(NamedRoutes.buildCoursePath(), CoursesController::build);
         app.post(NamedRoutes.coursesPath(), CoursesController::create);
         app.get(NamedRoutes.coursePath("{id}"), CoursesController::show);
-
 
  // USERS
         app.get(NamedRoutes.buildUserPath(), UsersController::build);
@@ -82,8 +66,6 @@ public class HelloWorld {
 
 
         app.start(7070);
-
-
     }
 }
 

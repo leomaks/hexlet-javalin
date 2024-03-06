@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CoursesRepository extends BaseRepository {
-    ///////
-
     public static void save(Course course) throws SQLException {
         String sql = "INSERT INTO courses (name, description) VALUES (?, ?)";
         try (var conn = dataSource.getConnection();
@@ -71,23 +69,4 @@ public class CoursesRepository extends BaseRepository {
         return courses;
     }
 }
-
-  /*
-    public static List<Course> getEntities() {
-        return entities;
-    }
-
-    public static Optional<Course> find(Long id) {
-        var course = entities.stream()
-                .filter(entity -> entity.getId().equals(id))
-                .findAny();
-        return course;
-    }
-
-    public static void save(Course course) {
-        course.setId((long) entities.size() + 1);
-        entities.add(course);
-    }
-    private static List<Course> entities = new ArrayList<Course>();
-   */
 
