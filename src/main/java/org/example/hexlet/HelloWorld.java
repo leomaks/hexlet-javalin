@@ -31,8 +31,10 @@ public class HelloWorld {
 
         var dataSource = new HikariDataSource(hikariConfig);
 
-
+      //  Path pathToFile = Paths.get(filename);
+      //  System.out.println(pathToFile.toAbsolutePath());
         // Получаем путь до файла в src/main/resources
+
         var url = HelloWorld.class.getClassLoader().getResource("schema.sql");
         var file = new File(url.getFile());
         Collectors Collectors = null;
@@ -51,31 +53,7 @@ public class HelloWorld {
         var app = Javalin.create(config -> {config.plugins.enableDevLogging();});
 
 
-
-
-
-
-
-
-
-
-/////////
-
-
-    //    app.get("/", ctx -> ctx.render("layout/page.jte"));
-        //////////
-
-/*
-        app.get("/", ctx -> {
-            var visited = Boolean.valueOf(ctx.cookie("visited"));
-            var page = new MainPage(visited);
-            ctx.render("index.jte", Collections.singletonMap("page", page));
-            ctx.cookie("visited", String.valueOf(true));
-        });
-
- */
-
-        app.get("/", ctx -> {
+       app.get("/", ctx -> {
             var page = new MainPage(ctx.sessionAttribute("currentUser"));
             ctx.render("index.jte", Collections.singletonMap("page", page));
         });
@@ -105,20 +83,7 @@ public class HelloWorld {
 
         app.start(7070);
 
-         /* app.get("/hello", ctx -> {
 
-            ctx.result("Hello, "
-                    +  ctx.queryParamAsClass("name", String.class).getOrDefault("World")
-                    + "!");
-        });*/
-               /* app.get("/users/{id}", ctx -> {
-            var id = ctx.pathParam("id");
-            var escapedId = StringEscapeUtils.escapeHtml4(id);
-            ctx.contentType("text/html");
-            ctx.result(escapedId);
-        });
-
-        */
     }
 }
 
