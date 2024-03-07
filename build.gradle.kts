@@ -3,7 +3,6 @@ import org.gradle.api.tasks.testing.logging.TestLogEvent
 import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
 
 plugins {
-
     application
 
     id("io.freefair.lombok") version "8.1.0"
