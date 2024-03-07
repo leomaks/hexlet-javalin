@@ -21,6 +21,6 @@ COPY ./ .
 
 RUN gradle installDist
 
-CMD ./build/install/hexlet-javalin/bin/HexletJavalin
+CMD ./build/install/HexletJavalin/bin/HexletJavalin
 
 
