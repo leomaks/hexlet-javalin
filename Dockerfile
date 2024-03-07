@@ -19,8 +19,8 @@ WORKDIR /HexletJavalin
 
 COPY ./ .
 
-RUN gradle installDist
+RUN gradle installShadowDist
 
-CMD ./build/install/HexletJavalin/lib/HexletJavalin
+CMD ./build/install/HexletJavalin/bin/HexletJavalin
 
 
