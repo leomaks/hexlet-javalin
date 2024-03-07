@@ -11,8 +11,10 @@ import org.example.hexlet.util.NamedRoutes;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.Collections;
@@ -27,11 +29,16 @@ public class HelloWorld {
         var dataSource = new HikariDataSource(hikariConfig);
 
 
-        var url = HelloWorld.class.getClassLoader().getResource("schema.sql");
+       /* var url = HelloWorld.class.getClassLoader().getResource("schema.sql");
         var file = new File(url.getFile());
         Collectors Collectors = null;
         var sql = Files.lines(file.toPath()).collect(Collectors.joining("\n"));
-         
+
+        */
+
+        var uri = HelloWorld.class.getClassLoader().getResourceAsStream("schema.sql");
+        var sql = new BufferedReader(new InputStreamReader(uri))
+                .lines().collect(Collectors.joining("\n"));
 
 
         // Получаем соединение, создаем стейтмент и выполняем запрос
