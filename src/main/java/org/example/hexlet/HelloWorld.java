@@ -26,10 +26,13 @@ public class HelloWorld {
 
         var dataSource = new HikariDataSource(hikariConfig);
 
+
         var url = HelloWorld.class.getClassLoader().getResource("schema.sql");
         var file = new File(url.getFile());
         Collectors Collectors = null;
         var sql = Files.lines(file.toPath()).collect(Collectors.joining("\n"));
+         
+
 
         // Получаем соединение, создаем стейтмент и выполняем запрос
         try (var connection = dataSource.getConnection();
