@@ -21,6 +21,6 @@ COPY ./ .
 
 RUN gradle installShadowDist
 
-CMD ./build/install/HexletJavalin/bin/HexletJavalin
+CMD ./build/install/HexletJavalin-shadow/bin/HexletJavalin
 
 
