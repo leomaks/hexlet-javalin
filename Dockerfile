@@ -17,10 +17,10 @@ ENV PATH=$PATH:$GRADLE_HOME/bin
 
 WORKDIR /HexletJavalin
 
-COPY / .
+COPY ./ ./
 
 RUN gradle installDist
 
-CMD ./build/install/HexletJavalin/lib/HexletJavalin-1.0-SNAPSHOT.jar
+CMD ./build/install/HexletJavalin/bin/HexletJavalin
 
 
