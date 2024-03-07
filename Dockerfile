@@ -17,7 +17,7 @@ ENV PATH=$PATH:$GRADLE_HOME/bin
 
 WORKDIR /HexletJavalin
 
-COPY ./HexletJavalin .
+COPY HexletJavalin .
 
 RUN gradle installDist
 
