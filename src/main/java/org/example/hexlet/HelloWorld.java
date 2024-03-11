@@ -12,10 +12,8 @@ import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.nio.file.Files;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.stream.Collectors;
@@ -25,19 +23,10 @@ public class HelloWorld {
 
         var hikariConfig = new HikariConfig();
         hikariConfig.setJdbcUrl("jdbc:h2:mem:hexlet_project;DB_CLOSE_DELAY=-1;");
-
         var dataSource = new HikariDataSource(hikariConfig);
 
-
-       /* var url = HelloWorld.class.getClassLoader().getResource("schema.sql");
-        var file = new File(url.getFile());
-        Collectors Collectors = null;
-        var sql = Files.lines(file.toPath()).collect(Collectors.joining("\n"));
-
-        */
-
-        var uri = HelloWorld.class.getClassLoader().getResourceAsStream("schema.sql");
-        var sql = new BufferedReader(new InputStreamReader(uri))
+        var url = HelloWorld.class.getClassLoader().getResourceAsStream("schema.sql");
+        var sql = new BufferedReader(new InputStreamReader(url))
                 .lines().collect(Collectors.joining("\n"));
 
 

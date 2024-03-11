@@ -27,28 +27,5 @@ public class NamedRoutes {
     public static String sessionsPath() {
         return "/sessions";
     }
-
-/*
-"/users/build"
-
-"/courses/{id}"
-"/courses/build"
-
-
-    public static String buildUserPath() {
-        return "/users/build";
-    }
-
-    public static String coursesPath() {
-        return "/courses";
-    }
-
-    // Это нужно, чтобы не преобразовывать типы снаружи
-    public static String coursePath(Long id) {
-        return coursePath(String.valueOf(id));
-    }
-
-
-
- */
+    
 }

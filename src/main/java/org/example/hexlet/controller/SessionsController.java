@@ -9,9 +9,6 @@ public class SessionsController {
 
     public static void create(Context ctx) {
         var nickname = ctx.formParam("nickname");
-
-        // Тут должна быть проверка пароля
-
         ctx.sessionAttribute("currentUser", nickname);
         ctx.redirect("/");
     }
